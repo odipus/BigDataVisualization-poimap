@@ -1,0 +1,1647 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>基于移动大数据商务选址</title>
+    <link href="resource/css/normalize.css">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" rel="stylesheet">-->
+    <!-- Bootstrap -->
+    <link href="resource/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Plugin -->
+    <link href="resource/toggle/css/tiny-toggle.css" rel="stylesheet">
+    <link href="resource/slider/radios-to-slider.css" rel="stylesheet">
+    <link href="resource/dropdown/css/easydropdown.css" rel="stylesheet">
+
+    <style type="text/css">
+
+
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+
+        }
+        body{
+            /*overflow-x:hidden;*/
+            height: 100%;
+            overflow-x: hidden;
+
+        }
+        .radios-to-slider.medium .slider-label {
+            top: -23px;
+            width: 44px;
+        }
+        #header {position: fixed;
+              top:0;left: 0;width: 100%;height: 80px;background-color: white;
+              box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.45);
+              border-top: 5px solid #316594;
+              z-index: 999999;}
+
+        #header img{position: absolute;bottom:17px;left: 100px;}
+        #header .title{position: absolute;left: 569px;bottom: 24px;}
+
+
+
+        #nav {
+            position: fixed;
+            top: 80px;
+            width: 380px;
+            height: 800px;
+            background-color: white;
+            box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.45);
+        }
+        #nav .tab_n {position:absolute; left:0;margin:0px;width: 54px;height: 100%;background-color: #232323;}
+        #nav .tab_n li{ list-style:none;left:0;margin:0px;width: 54px;height:58px;cursor: pointer;}
+        #nav .tab_c{ position: absolute;left:54px;width: 326px;height: 500px;}
+
+
+        #view {
+
+            margin-right: 8px;
+            margin-top: 87px;
+            margin-left: 388px;
+            position: relative;
+            margin-bottom: 8px;
+
+        }
+        #view div{
+            width: 500px;
+            margin: 3px;
+            display: inline-block;
+        }
+
+        p > span {
+            color: #009933;
+            font-weight: bold;
+        }
+
+        section {
+            margin: 20px auto;
+
+            width: 300px;
+
+        }
+
+        section .content {
+            position: relative;
+            height: 93px;
+            border-bottom: 2px solid #ECECEC;
+        }
+        section .content div{
+
+            display: inline-block;
+            margin-left: 30px;
+            margin-bottom: 14px;
+            width: 100px;
+
+        }
+
+        section .content .check_title {
+            line-height: 32px;
+            display: inline;
+            font-size: 1em;
+            font-weight: 200;
+            color: #666666;
+            margin-left: 13px;
+        }
+
+        section .content .check_box {
+            width: 24px;
+            height: 24px;
+            margin-top:6px;
+            margin-left: 15px;
+            display: inline;
+            position: absolute;
+
+        }
+        section .content_scale .check_title{
+            line-height: 93px;
+            display: inline;
+            font-size: 1em;
+            font-weight: 200;
+            color: #666666;
+            margin-left: 31px;
+         }
+
+        section .content_scale div{
+            display: inline-block;
+            margin-left: 12px;
+            margin-bottom: -11px;
+            width: 122px;
+        }
+        section .content_dropdown {
+            margin-top: 19px;
+            /*border-bottom: 2px solid #ECECEC;*/
+        }
+
+        section .content_dropdown div{
+            display: inline-block;
+            margin-top: 0px;
+            width: 90px;
+            margin-left: 0px;
+            margin-bottom: 13px;
+        }
+
+        section .content_toggle .check_title{
+            line-height: 93px;
+            display: inline;
+            font-size: 1em;
+            font-weight: 200;
+            color: #666666;
+            margin-left: 31px;
+        }
+        section .content_toggle .check_box{
+            width: 24px;
+            height: 24px;
+            margin-top: 30px;
+            margin-left: 26px;
+            display: inline;
+            position: absolute;
+        }
+
+        section .SingleButton{
+            margin: 0 auto;
+            text-align:center
+        }
+
+        .dropdown ul {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            list-style: none;
+            overflow: hidden;
+            padding-left: 0;
+        }
+        .dropdown {
+            position: relative;
+            width: 160px;
+            border: 0;
+            border-radius: 0px;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+            background: #fff;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        .dropdown .selected, .dropdown li {
+            display: block;
+            font-size: 14px;
+            line-height: 1;
+            color: #000;
+            padding: 9px 12px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+
+
+</head>
+
+    <div id="header">
+
+        <img src="resource/中国移动_logo.png" width="202" height="43">
+        <img class="title" src="resource/标题.png" width="285" height="22">
+
+    </div>
+    <div id="nav">
+        <div class="tab_n">
+
+            <li><img src="resource/兴趣_hover.png"width="54" height="58"></li>
+            <li><img src="resource/轨迹.png"width="54" height="58"></li>
+
+        </div>
+        <div class="tab_c">
+            <section>
+                <p>区域</p>
+                <div id = menu_drop class=" content_dropdown">
+                    <select  class="dropdown" >
+                        <option value="" class="label">市</option>
+                        <option value="1">沈阳</option>
+
+
+                    </select>
+
+                    <select class="dropdown" >
+                        <option value="" class="label">区</option>
+                        <option value="1">和平</option>
+                        <option value="2">沈河</option>
+                        <option value="3">皇姑</option>
+                        <option value="4">铁西</option>
+
+                    </select>
+                    <select class="dropdown" >
+                        <option value="" class="label">位置</option>
+                        <option value="1">商圈</option>
+                        <option value="2">住宅</option>
+                        <option value="3">大学</option>
+
+                    </select>
+                </div>
+
+            </section>
+            <section>
+                <p>兴趣</p>
+                <div class="content">
+                    <div>
+                        <p class="check_title">美食</p>
+                        <div class="check_box">
+                            <input type="checkbox" class="tiny-toggle" data-tt-type="square_v" data-tt-size="medium">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="check_title">电影</p>
+                        <div class="check_box">
+                            <input type="checkbox" class="tiny-toggle" data-tt-type="square_v" data-tt-size="medium">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="check_title">歌厅</p>
+                        <div class="check_box">
+                            <input type="checkbox" class="tiny-toggle" data-tt-type="square_v" data-tt-size="medium">
+                        </div>
+                    </div>
+                    <div>
+                        <p class="check_title">酒店</p>
+                        <div class="check_box">
+                            <input type="checkbox" class="tiny-toggle" data-tt-type="square_v" data-tt-size="medium">
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section>
+                <p>范围</p>
+                <div class="content content_scale">
+                    <p class="check_title">范围</p>
+                    <div>
+                        <div id="radios">
+                            <input id="option1" name="options" type="radio">
+                            <label for="option1"> 1 </label>
+                            <input id="option2" name="options" type="radio">
+                            <label for="option2"> 2 </label>
+                            <input id="option3" name="options" type="radio" checked>
+                            <label for="option3"> 3 </label>
+                        </div>
+
+                    </div>
+                    <p class="check_title">公里</p>
+
+
+                </div>
+            </section>
+
+            <!--<section>-->
+                <!--<div class="content content_toggle">-->
+                    <!--<p class="check_title">在地图上显示热力图</p>-->
+                    <!--<div class="check_box">-->
+                        <!--<input type="checkbox" class="tiny-toggle" data-tt-type="toggle" data-tt-size="big">-->
+                    <!--</div>-->
+
+
+                <!--</div>-->
+            <!--</section>-->
+
+
+
+
+
+
+            <section>
+
+
+                <div class="SingleButton">
+                    <button type="button" id = "testbutton" class="btn btn-primary" >生成兴趣密度轨迹图</button>
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </div>
+
+    <div id="view">
+        <div id="main3" style="width:100%;height:590px;border:1px solid #ccc;padding:10px;">
+
+        </div>
+        <div id="main" style=" height:500px;border:1px solid #ccc;padding:10px;"></div>
+        <div id="main2" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+    </div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+    <script src="resource/js/jquery.min.js"></script>
+    <script src="resource/js/bootstrap.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="resource/toggle/js/tiny-toggle.js"></script>
+    <script src="resource/slider/jquery.radios-to-slider.js"></script>
+    <script src="resource/dropdown/js/jquery.easydropdown.js"></script>
+
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=09MUSX8OFb39XByrIqlhppSD"></script>
+
+    <script type="text/javascript" src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+    <script type="text/javascript" src='data/heatmap.js' ></script>
+    <script src="resource/echarts/echarts-all.js"></script>
+    <script src="resource/echarts/BMap.js"></script>
+    <script src="resource/echarts/main.js"></script>
+
+    <script type="text/javascript" src="http://huiyan.baidu.com/mapv/demo/js/lib/Mapv.js"></script>
+    <script type="text/javascript" src="http://huiyan.baidu.com/mapv/demo/js/lib/drive.js"></script>
+
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.setOption({
+            title : {
+                text: '兴趣分布密度',
+                subtext: '基于移动大数据',
+                x:'center'
+            },
+            legend: {
+                orient : 'vertical',
+                x : 'left',
+                data:['火锅','海鲜','电影','KTV','酒店']
+            },
+            calculable : true,
+            series : [
+                {
+                    name:'兴趣',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', 225],
+                    data:[
+                        {value:335, name:'火锅'},
+                        {value:310, name:'海鲜'},
+                        {value:234, name:'电影'},
+                        {value:135, name:'KTV'},
+                        {value:1548, name:'酒店'}
+                    ]
+                }
+            ]
+        });
+
+        var myChart2 = echarts.init(document.getElementById('main2'));
+        myChart2.setOption({
+            title : {
+                text: '兴趣人数',
+                subtext: '基于移动大数据',
+                x:'center'
+            },
+            legend: {
+                data:['火锅','海鲜','电影','KTV','酒店'],
+                show:false
+            },
+
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['周一','周二','周三','周四','周五','周六','周日']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    splitArea : {show : true}
+                }
+            ],
+            grid: {
+                x2:40
+            },
+            series : [
+                {
+                    name:'火锅',
+                    type:'bar',
+                    stack: '总量',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'海鲜',
+                    type:'bar',
+                    stack: '总量',
+                    data:[120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name:'电影',
+                    type:'bar',
+                    stack: '总量',
+                    data:[220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                    name:'KTV',
+                    type:'bar',
+                    stack: '总量',
+                    data:[150, 232, 201, 154, 190, 330, 410]
+                },
+                {
+                    name:'酒店',
+                    type:'bar',
+                    stack: '总量',
+                    data:[820, 932, 901, 934, 1290, 1330, 1320]
+                }
+            ]
+        });
+        myChart.connect(myChart2);
+        myChart2.connect(myChart);
+
+        //        var myChart3 = echarts.init(document.getElementById('main3'));
+        //
+        //        var option= {
+        //            backgroundColor: '#1b1b1b',
+        //                    title : {
+        //                text: '兴趣轨迹分布',
+        //                        x:'center',
+        //                        y:'top',
+        //                        textStyle: {
+        //                    color: 'white'
+        //                }
+        //            },
+        //            legend: {
+        //                show: true,
+        //                        selected: {},
+        //                x: 'left',
+        //                        orient: 'vertical',
+        //                        textStyle: {
+        //                    color: 'white'
+        //                },
+        //                data: []
+        //            },
+        //            series : [{
+        //                name: "Migration",
+        //                type: 'map',
+        //                mapType: 'china',
+        //
+        //                itemStyle: {
+        //                    normal: {
+        //                        borderColor:'rgba(100,149,237,0.2)',
+        //                        borderWidth:0.5,
+        //                        areaStyle: {
+        //                            color: '#1b1b1b'
+        //                        }
+        //                    }
+        //                },
+        //                data: [{}],
+        //                hoverable: false,
+        //                clickable: false,
+        //                roam: true,
+        //                markLine: {
+        //                    effect: {
+        //                        color: 'rgba(204, 246, 255, 0.09)',
+        //                        show: true,
+        //                        period: 40
+        //                    },
+        //                    bundling: {
+        //                        enable: true
+        //                    },
+        //                    large: true,
+        //                    smooth: true,
+        //                    smoothness: 0.1,
+        //                    symbol: ['none', 'none'],
+        //                    itemStyle: {
+        //                        normal: {
+        //                            lineStyle: {
+        //                                color: 'rgba(2, 166, 253, 0.05)',
+        //                                type: 'solid',
+        //                                width: 0.5,
+        //                                opacity: 0.2
+        //                            }
+        //                        }
+        //                    },
+        //                    data: []
+        //                },
+        //                markPoint: {
+        //                    symbol: 'circle',
+        //                    symbolSize: 1.5,
+        //                    itemStyle: {
+        //                        normal: {
+        //                            color: 'rgba(255, 0, 0, 0.5)'
+        //                        }
+        //                    },
+        //                    data: []
+        //                }
+        //            }]
+        //        };
+        //        myChart3.setOption(option);
+        //        var geoCoord = {"北京":[116.395645,39.929986],"上海":[121.487899,31.249162],"天津":[117.210813,39.14393],"重庆":[106.530635,29.544606],"安徽":[117.216005,31.859252],"合肥":[117.282699,31.866942],"安庆":[117.058739,30.537898],"蚌埠":[117.35708,32.929499],"亳州":[115.787928,33.871211],"巢湖":[117.88049,31.608733],"池州":[117.494477,30.660019],"滁州":[118.32457,32.317351],"阜阳":[115.820932,32.901211],"淮北":[116.791447,33.960023],"淮南":[117.018639,32.642812],"黄山":[118.29357,29.734435],"六安":[116.505253,31.755558],"马鞍山":[118.515882,31.688528],"宿州":[116.988692,33.636772],"铜陵":[117.819429,30.94093],"芜湖":[118.384108,31.36602],"宣城":[118.752096,30.951642],"福建":[117.984943,26.050118],"福州":[119.330221,26.047125],"龙岩":[117.017997,25.078685],"南平":[118.181883,26.643626],"宁德":[119.542082,26.656527],"莆田":[119.077731,25.44845],"泉州":[118.600362,24.901652],"三明":[117.642194,26.270835],"厦门":[118.103886,24.489231],"漳州":[117.676205,24.517065],"甘肃":[102.457625,38.103267],"兰州":[103.823305,36.064226],"白银":[104.171241,36.546682],"定西":[104.626638,35.586056],"甘南":[102.917442,34.992211],"嘉峪关":[98.281635,39.802397],"金昌":[102.208126,38.516072],"酒泉":[98.508415,39.741474],"临夏":[103.215249,35.598514],"陇南":[104.934573,33.39448],"平凉":[106.688911,35.55011],"庆阳":[107.644227,35.726801],"天水":[105.736932,34.584319],"武威":[102.640147,37.933172],"张掖":[100.459892,38.93932],"广东":[113.394818,23.408004],"广州":[113.30765,23.120049],"潮州":[116.630076,23.661812],"东莞":[113.763434,23.043024],"佛山":[113.134026,23.035095],"河源":[114.713721,23.757251],"惠州":[114.410658,23.11354],"江门":[113.078125,22.575117],"揭阳":[116.379501,23.547999],"茂名":[110.931245,21.668226],"梅州":[116.126403,24.304571],"清远":[113.040773,23.698469],"汕头":[116.72865,23.383908],"汕尾":[115.372924,22.778731],"韶关":[113.594461,24.80296],"深圳":[114.025974,22.546054],"阳江":[111.97701,21.871517],"云浮":[112.050946,22.937976],"湛江":[110.365067,21.257463],"肇庆":[112.479653,23.078663],"中山":[113.42206,22.545178],"珠海":[113.562447,22.256915],"东沙群岛":[117.309186,19.083978],"广西":[108.924274,23.552255],"南宁":[108.297234,22.806493],"百色":[106.631821,23.901512],"北海":[109.122628,21.472718],"崇左":[107.357322,22.415455],"防城港":[108.351791,21.617398],"桂林":[110.26092,25.262901],"贵港":[109.613708,23.103373],"河池":[108.069948,24.699521],"贺州":[111.552594,24.411054],"来宾":[109.231817,23.741166],"柳州":[109.422402,24.329053],"钦州":[108.638798,21.97335],"梧州":[111.305472,23.485395],"玉林":[110.151676,22.643974],"贵州":[106.734996,26.902826],"贵阳":[106.709177,26.629907],"安顺":[105.92827,26.228595],"毕节":[105.300492,27.302612],"六盘水":[104.852087,26.591866],"铜仁":[109.196161,27.726271],"遵义":[106.93126,27.699961],"黔西南":[104.900558,25.095148],"黔东南":[107.985353,26.583992],"黔南":[107.523205,26.264536],"海南":[100.624066,36.284364],"海口":[110.330802,20.022071],"白沙":[109.358586,19.216056],"保亭":[109.656113,18.597592],"昌江":[109.0113,19.222483],"儋州":[109.413973,19.571153],"澄迈":[109.996736,19.693135],"东方":[108.85101,18.998161],"定安":[110.32009,19.490991],"琼海":[110.414359,19.21483],"琼中":[109.861849,19.039771],"乐东":[109.062698,18.658614],"临高":[109.724101,19.805922],"陵水":[109.948661,18.575985],"三亚":[109.522771,18.257776],"屯昌":[110.063364,19.347749],"万宁":[110.292505,18.839886],"文昌":[110.780909,19.750947],"五指山":[109.51775,18.831306],"三沙":[112.342491,16.843901],"西沙群岛":[111.79977,16.219423],"南沙群岛":[114.736439,10.370353],"河北":[115.661434,38.61384],"石家庄":[114.522082,38.048958],"保定":[115.49481,38.886565],"沧州":[116.863806,38.297615],"承德":[117.933822,40.992521],"邯郸":[114.482694,36.609308],"衡水":[115.686229,37.746929],"廊坊":[116.703602,39.518611],"秦皇岛":[119.604368,39.945462],"唐山":[118.183451,39.650531],"邢台":[114.520487,37.069531],"张家口":[114.893782,40.811188],"河南":[113.486804,34.157184],"济源":[112.609183,35.073092],"郑州":[113.649644,34.75661],"安阳":[114.351807,36.110267],"鹤壁":[114.29777,35.755426],"焦作":[113.211836,35.234608],"开封":[114.351642,34.801854],"洛阳":[112.447525,34.657368],"漯河":[114.046061,33.576279],"南阳":[112.542842,33.01142],"平顶山":[113.300849,33.745301],"濮阳":[115.026627,35.753298],"三门峡":[111.181262,34.78332],"商丘":[115.641886,34.438589],"新乡":[113.91269,35.307258],"信阳":[114.085491,32.128582],"许昌":[113.835312,34.02674],"周口":[114.654102,33.623741],"驻马店":[114.049154,32.983158],"黑龙江":[128.047414,47.356592],"哈尔滨":[126.657717,45.773225],"大庆":[125.02184,46.596709],"大兴安岭":[124.196104,51.991789],"鹤岗":[130.292472,47.338666],"黑河":[127.50083,50.25069],"鸡西":[130.941767,45.32154],"佳木斯":[130.284735,46.81378],"牡丹江":[129.608035,44.588521],"七台河":[131.019048,45.775005],"齐齐哈尔":[123.987289,47.3477],"双鸭山":[131.171402,46.655102],"绥化":[126.989095,46.646064],"伊春":[128.910766,47.734685],"湖北":[112.410562,31.209316],"武汉":[114.3162,30.581084],"鄂州":[114.895594,30.384439],"恩施":[109.517433,30.308978],"黄冈":[114.906618,30.446109],"黄石":[115.050683,30.216127],"荆门":[112.21733,31.042611],"荆州":[112.241866,30.332591],"潜江":[112.768768,30.343116],"神农架":[110.487231,31.595768],"十堰":[110.801229,32.636994],"随州":[113.379358,31.717858],"天门":[113.12623,30.649047],"仙桃":[113.387448,30.293966],"咸宁":[114.300061,29.880657],"襄阳":[112.176326,32.094934],"孝感":[113.935734,30.927955],"宜昌":[111.310981,30.732758],"湖南":[111.720664,27.695864],"长沙":[112.979353,28.213478],"常德":[111.653718,29.012149],"郴州":[113.037704,25.782264],"衡阳":[112.583819,26.898164],"怀化":[109.986959,27.557483],"娄底":[111.996396,27.741073],"邵阳":[111.461525,27.236811],"湘潭":[112.935556,27.835095],"湘西":[109.745746,28.317951],"益阳":[112.366547,28.588088],"永州":[111.614648,26.435972],"岳阳":[113.146196,29.378007],"张家界":[110.48162,29.124889],"株洲":[113.131695,27.827433],"江苏":[119.368489,33.013797],"南京":[118.778074,32.057236],"常州":[119.981861,31.771397],"淮安":[119.030186,33.606513],"连云港":[119.173872,34.601549],"南通":[120.873801,32.014665],"苏州":[120.619907,31.317987],"宿迁":[118.296893,33.95205],"泰州":[119.919606,32.476053],"无锡":[120.305456,31.570037],"徐州":[117.188107,34.271553],"盐城":[120.148872,33.379862],"扬州":[119.427778,32.408505],"镇江":[119.455835,32.204409],"江西":[115.676082,27.757258],"南昌":[115.893528,28.689578],"抚州":[116.360919,27.954545],"赣州":[114.935909,25.845296],"吉安":[114.992039,27.113848],"景德镇":[117.186523,29.303563],"九江":[115.999848,29.71964],"萍乡":[113.859917,27.639544],"上饶":[117.955464,28.457623],"新余":[114.947117,27.822322],"宜春":[114.400039,27.81113],"鹰潭":[117.03545,28.24131],"吉林":[126.564544,43.871988],"长春":[125.313642,43.898338],"白城":[122.840777,45.621086],"白山":[126.435798,41.945859],"辽源":[125.133686,42.923303],"四平":[124.391382,43.175525],"松原":[124.832995,45.136049],"通化":[125.94265,41.736397],"延边":[129.485902,42.896414],"辽宁":[122.753592,41.6216],"沈阳":[123.432791,41.808645],"鞍山":[123.007763,41.118744],"本溪":[123.778062,41.325838],"朝阳":[120.446163,41.571828],"大连":[121.593478,38.94871],"丹东":[124.338543,40.129023],"抚顺":[123.92982,41.877304],"阜新":[121.660822,42.01925],"葫芦岛":[120.860758,40.74303],"锦州":[121.147749,41.130879],"辽阳":[123.172451,41.273339],"盘锦":[122.073228,41.141248],"铁岭":[123.85485,42.299757],"营口":[122.233391,40.668651],"内蒙古":[114.415868,43.468238],"呼和浩特":[111.660351,40.828319],"阿拉善":[105.695683,38.843075],"包头":[109.846239,40.647119],"巴彦淖尔":[107.423807,40.76918],"赤峰":[118.930761,42.297112],"鄂尔多斯":[109.993706,39.81649],"呼伦贝尔":[119.760822,49.201636],"通辽":[122.260363,43.633756],"乌海":[106.831999,39.683177],"乌兰察布":[113.112846,41.022363],"锡林郭勒":[116.02734,43.939705],"兴安盟":[122.048167,46.083757],"宁夏":[106.155481,37.321323],"银川":[106.206479,38.502621],"固原":[106.285268,36.021523],"石嘴山":[106.379337,39.020223],"吴忠":[106.208254,37.993561],"中卫":[105.196754,37.521124],"青海":[96.202544,35.499761],"西宁":[101.767921,36.640739],"果洛":[100.223723,34.480485],"海东":[102.085207,36.51761],"海北":[100.879802,36.960654],"海西":[97.342625,37.373799],"黄南":[102.0076,35.522852],"玉树":[97.013316,33.00624],"山东":[118.527663,36.09929],"济南":[117.024967,36.682785],"滨州":[117.968292,37.405314],"东营":[118.583926,37.487121],"德州":[116.328161,37.460826],"菏泽":[115.46336,35.26244],"济宁":[116.600798,35.402122],"莱芜":[117.684667,36.233654],"聊城":[115.986869,36.455829],"临沂":[118.340768,35.072409],"青岛":[120.384428,36.105215],"日照":[119.50718,35.420225],"泰安":[117.089415,36.188078],"威海":[122.093958,37.528787],"潍坊":[119.142634,36.716115],"烟台":[121.309555,37.536562],"枣庄":[117.279305,34.807883],"淄博":[118.059134,36.804685],"山西":[112.515496,37.866566],"太原":[112.550864,37.890277],"长治":[113.120292,36.201664],"大同":[113.290509,40.113744],"晋城":[112.867333,35.499834],"晋中":[112.738514,37.693362],"临汾":[111.538788,36.099745],"吕梁":[111.143157,37.527316],"朔州":[112.479928,39.337672],"忻州":[112.727939,38.461031],"阳泉":[113.569238,37.869529],"运城":[111.006854,35.038859],"陕西":[109.503789,35.860026],"西安":[108.953098,34.2778],"安康":[109.038045,32.70437],"宝鸡":[107.170645,34.364081],"汉中":[107.045478,33.081569],"商洛":[109.934208,33.873907],"铜川":[108.968067,34.908368],"渭南":[109.483933,34.502358],"咸阳":[108.707509,34.345373],"延安":[109.50051,36.60332],"榆林":[109.745926,38.279439],"四川":[102.89916,30.367481],"成都":[104.067923,30.679943],"阿坝":[102.228565,31.905763],"巴中":[106.757916,31.869189],"达州":[107.494973,31.214199],"德阳":[104.402398,31.13114],"甘孜":[101.969232,30.055144],"广安":[106.63572,30.463984],"广元":[105.819687,32.44104],"乐山":[103.760824,29.600958],"凉山":[102.259591,27.892393],"泸州":[105.44397,28.89593],"南充":[106.105554,30.800965],"眉山":[103.84143,30.061115],"绵阳":[104.705519,31.504701],"内江":[105.073056,29.599462],"攀枝花":[101.722423,26.587571],"遂宁":[105.564888,30.557491],"雅安":[103.009356,29.999716],"宜宾":[104.633019,28.769675],"资阳":[104.63593,30.132191],"自贡":[104.776071,29.359157],"西藏":[89.137982,31.367315],"拉萨":[91.111891,29.662557],"阿里":[81.107669,30.404557],"昌都":[97.185582,31.140576],"林芝":[94.349985,29.666941],"那曲":[92.067018,31.48068],"日喀则":[88.891486,29.269023],"山南":[91.750644,29.229027],"新疆":[85.614899,42.127001],"乌鲁木齐":[87.564988,43.84038],"阿拉尔":[81.291737,40.61568],"阿克苏":[80.269846,41.171731],"阿勒泰":[88.137915,47.839744],"巴音郭楞":[86.121688,41.771362],"博尔塔拉":[82.052436,44.913651],"昌吉":[87.296038,44.007058],"哈密":[93.528355,42.858596],"和田":[79.930239,37.116774],"喀什":[75.992973,39.470627],"克拉玛依":[84.88118,45.594331],"克孜勒苏":[76.137564,39.750346],"石河子":[86.041865,44.308259],"塔城":[82.974881,46.758684],"图木舒克":[79.198155,39.889223],"吐鲁番":[89.181595,42.96047],"五家渠":[87.565449,44.368899],"伊犁":[81.297854,43.922248],"云南":[101.592952,24.864213],"昆明":[102.714601,25.049153],"保山":[99.177996,25.120489],"楚雄":[101.529382,25.066356],"大理":[100.223675,25.5969],"德宏":[98.589434,24.44124],"迪庆":[99.713682,27.831029],"红河":[103.384065,23.367718],"丽江":[100.229628,26.875351],"临沧":[100.092613,23.887806],"怒江":[98.859932,25.860677],"普洱":[100.980058,22.788778],"曲靖":[103.782539,25.520758],"昭通":[103.725021,27.340633],"文山":[104.089112,23.401781],"西双版纳":[100.803038,22.009433],"玉溪":[102.545068,24.370447],"浙江":[119.957202,29.159494],"杭州":[120.219375,30.259244],"湖州":[120.137243,30.877925],"嘉兴":[120.760428,30.773992],"金华":[119.652576,29.102899],"丽水":[119.929576,28.4563],"宁波":[121.579006,29.885259],"衢州":[118.875842,28.95691],"绍兴":[120.592467,30.002365],"台州":[121.440613,28.668283],"温州":[120.690635,28.002838],"舟山":[122.169872,30.03601],"香港":[114.186124,22.293586],"澳门":[113.557519,22.204118],"台湾":[120.961454,23.80406],"台北":[121.489971,25.094466]};
+        //
+        //        function getGeoCoord (name) {
+        //            var city = name.split('_').pop();
+        //            var coord = geoCoord[city];
+        //            return coord;
+        //        }
+        //
+        //        $.ajax({
+        //            url: 'data/migration.json',
+        //            dataType: 'json',
+        //            success: function(data) {
+        //                option.series[0].markLine.data = data.allLine.sort(function (a, b) {
+        //                    return b.num - a.num
+        //                }).slice(0, 3000).map(function (line) {
+        //                    return [{
+        //                        geoCoord: getGeoCoord(line.start)
+        //                    }, {
+        //                        geoCoord: getGeoCoord(line.end)
+        //                    }]
+        //                });
+        //
+        //                option.series[0].markPoint.data = data.topCityOut.map(function (point) {
+        //                    return {
+        //                        geoCoord: getGeoCoord(point.name)
+        //                    }
+        //                });
+        //                myChart3.setOption(option);
+        //            }
+        //        });
+        //
+
+
+        // 初始化地图
+        var BMapExt = new BMapExt($('#main3')[0], BMap, echarts,{
+            enableMapClick: false
+        });
+        var map = BMapExt.getMap();
+        var container = BMapExt.getEchartsContainer();
+
+        var startPoint = {
+            x: 123.4238,
+            y: 41.8016
+        };
+        var point = new BMap.Point(startPoint.x, startPoint.y);
+        map.centerAndZoom(point, 11);
+        map.enableScrollWheelZoom(true);
+
+
+        option3 = {
+            color: ['gold','aqua','lime'],
+            tooltip : {
+                trigger: 'item',
+                formatter: function (v) {
+                    return v[1].replace(':', ' > ');
+                }
+            },
+
+            series : [
+
+
+                {
+                    name:'全国',
+                    type:'map',
+                    mapType: 'none',
+                    data:[],
+                    geoCoord: {
+                    },
+
+                    markPoint: {
+                        symbol: 'circle',
+                        symbolSize: 1.5,
+                        itemStyle: {
+                            normal: {
+                                color: 'rgba(255, 0, 0, 0.5)'
+                            }
+                        },
+                        data: [
+
+                        ]
+                    },
+
+
+                    markLine : {
+                        effect: {
+                            //color: 'rgba(204, 246, 255, 255)',
+                            color: 'rgba(0, 0, 255, 255)',
+                            show: true,
+                            period: 40,
+                            loop:  false
+                        },
+                        large: true,
+                        //smooth: true,
+                        //smoothness: 0.1,
+                        symbol: ['none', 'none'],
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    // color: 'rgba(20, 166, 253, 0.05)',
+                                    color: 'rgba(0, 0, 255, 0.05)',
+                                    type: 'solid',
+                                    width: 0.5,
+                                    opacity: 0.2
+                                }
+                            }
+                        },
+                        data : [
+
+                        ]
+                    }
+
+                }
+
+
+            ]
+        };
+        myChart3 = BMapExt.initECharts(container, curTheme);
+        window.onresize = myChart.resize;
+        BMapExt.setOption(option3, true);
+
+
+        var oval;
+        var marker;
+
+        function getBoundary(text,r){
+
+            function add_oval(centre,y)
+            {
+                var assemble=new Array();
+                var angle;
+                var dot;
+
+                for(i=0;i<360;i++)
+                {
+                    angle = (2* Math.PI / 360) * i;
+                    dot = new BMap.Point(centre.lng+Math.cos(angle)*y, centre.lat+Math.sin(angle)*y/3*2.26);
+                    assemble.push(dot);
+                }
+                return assemble;
+            }
+//            map.clearOverlays();
+            if(oval)
+            {
+                oval.hide();
+                marker.hide();
+            }
+            var ovalArray=[];
+
+            var myGeo = new BMap.Geocoder();
+            // 将地址解析结果显示在地图上,并调整地图视野
+            myGeo.getPoint(text, function(point){
+                if (point) {
+                    marker = new BMap.Marker(point);
+
+                    map.addOverlay(marker);
+                    marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+
+                    oval = new BMap.Polygon(add_oval(point,r), {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.0001
+                    });
+                    ovalArray = ovalArray.concat(oval.getPath());
+
+                    map.addOverlay(oval);
+                    map.setViewport(ovalArray);    //调整视野
+
+                }else{
+                    alert("您选择地址没有解析到结果!");
+                }
+
+
+            });
+
+        }
+
+
+
+
+        window.onload = function(){
+
+             var content = document.getElementById("nav");
+
+             var tabs = content.getElementsByTagName("div")[0];
+
+             var lis = tabs.getElementsByTagName("li");
+
+
+             lis[0].onclick = function() {
+
+                 lis[0].getElementsByTagName("img")[0].src="resource/兴趣_hover.png";
+                 lis[1].getElementsByTagName("img")[0].src="resource/轨迹.png";
+
+             },
+             lis[1].onclick = function() {
+
+                 lis[1].getElementsByTagName("img")[0].src="resource/轨迹_hover.png";
+                 lis[0].getElementsByTagName("img")[0].src="resource/兴趣.png";
+
+             }
+
+         };
+        var ArrPois=[];
+        var heatmapOverlay;
+
+        var searchlength = 0;
+
+        $( document ).ready( function() {
+
+
+            var checkbuttons = $(".tiny-toggle").tinyToggle();
+
+
+           
+
+            var radios = $("#radios");
+
+            radios.find("input")[0].checked = true;
+
+            $('#testbutton').on('click', function () {
+
+
+                //////////////////////////////////////////////////////////////////////////////////
+                //
+                //TODO Add heatmap
+                //
+                ////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+                var drv = new BMap.DrivingRoute('沈阳', {
+                    onSearchComplete: function(res) {
+                        if (drv.getStatus() == BMAP_STATUS_SUCCESS) {
+                            var plan = res.getPlan(0);
+                            var arrPois =[];
+                            for(var j=0;j<plan.getNumRoutes();j++){
+                                var route = plan.getRoute(j);
+                                arrPois= arrPois.concat(route.getPath());
+                                ArrPois.push(arrPois);
+
+                            }
+                            console.log(' search '+ArrPois.length+'complete!');
+//                            map.addOverlay(new BMap.Polyline(arrPois, {strokeColor:"blue",strokeOpacity:Math.random()}));
+                            if(ArrPois.length == 100) {
+                                
+                                searchlength = 0;
+
+                                var data = [];
+
+                                for (var i = 0; i < ArrPois.length; i++)
+                                    data.push([]);
+
+                                for (var i = 0; i < ArrPois.length; i++) {
+                                    ArrPois[i].forEach(function (point) {
+                                        var dat = [lonlat2mercator(point).x, lonlat2mercator(point).y];
+                                        data[i].push(dat);
+                                    });
+                                }
+                                map.clearOverlays();
+                                ArrPois.length = 0;
+                                // 第一步创建mapv示例
+                                var mapv = new Mapv({
+                                    drawTypeControl: true,
+                                    map: map  // 百度地图的map实例
+                                });
+
+
+                                var layer = new Mapv.Layer({
+                                    zIndex: 1,
+                                    mapv: mapv,
+                                    dataType: 'polyline',
+                                    coordType: 'bd09mc',
+                                    data: [
+                                        {"geo": data[0],"count":"1"},{"geo": data[1],"count":"2"},{"geo": data[2],"count":"1"},{"geo": data[3],"count":"1"},{"geo": data[4],"count":"1"},{"geo": data[5],"count":"2"},{"geo": data[6],"count":"2"},{"geo": data[7],"count":"1"},{"geo": data[8],"count":"1"},{"geo": data[9],"count":"1"},{"geo": data[10],"count":"1"},{"geo": data[11],"count":"3"},{"geo": data[12],"count":"2"},{"geo": data[13],"count":"3"},{"geo": data[14],"count":"2"},{"geo": data[15],"count":"1"},{"geo": data[16],"count":"5"},{"geo": data[17],"count":"1"},{"geo": data[18],"count":"6"},{"geo": data[19],"count":"2"},{"geo": data[20],"count":"1"},{"geo": data[21],"count":"1"},{"geo": data[22],"count":"1"},{"geo": data[23],"count":"2"},{"geo": data[24],"count":"1"},{"geo": data[25],"count":"1"},{"geo": data[26],"count":"1"},{"geo": data[27],"count":"1"},{"geo": data[28],"count":"1"},{"geo": data[29],"count":"1"},{"geo": data[30],"count":"1"},{"geo": data[31],"count":"1"},{"geo": data[32],"count":"8"},{"geo": data[33],"count":"3"},{"geo": data[34],"count":"1"},{"geo": data[35],"count":"3"},{"geo": data[36],"count":"1"},{"geo": data[37],"count":"4"},{"geo": data[38],"count":"1"},{"geo": data[39],"count":"2"},{"geo": data[40],"count":"2"},{"geo": data[41],"count":"3"},{"geo": data[42],"count":"1"},{"geo": data[43],"count":"1"},{"geo": data[44],"count":"1"},{"geo": data[45],"count":"3"},{"geo": data[46],"count":"1"},{"geo": data[47],"count":"3"},{"geo": data[48],"count":"1"},{"geo": data[49],"count":"2"},{"geo": data[50],"count":"1"},{"geo": data[51],"count":"1"},{"geo": data[52],"count":"1"},{"geo": data[53],"count":"1"},{"geo": data[54],"count":"1"},{"geo": data[55],"count":"1"},{"geo": data[56],"count":"6"},{"geo": data[57],"count":"1"},{"geo": data[58],"count":"1"},{"geo": data[59],"count":"3"},{"geo": data[60],"count":"1"},{"geo": data[61],"count":"4"},{"geo": data[62],"count":"1"},{"geo": data[63],"count":"1"},{"geo": data[64],"count":"1"},{"geo": data[65],"count":"3"},{"geo": data[66],"count":"3"},{"geo": data[67],"count":"1"},{"geo": data[68],"count":"1"},{"geo": data[69],"count":"2"},{"geo": data[70],"count":"1"},{"geo": data[71],"count":"1"},{"geo": data[72],"count":"2"},{"geo": data[73],"count":"3"},{"geo": data[74],"count":"4"},{"geo": data[75],"count":"1"},{"geo": data[76],"count":"1"},{"geo": data[77],"count":"1"},{"geo": data[78],"count":"1"},{"geo": data[79],"count":"1"},{"geo": data[80],"count":"1"},{"geo": data[81],"count":"1"},{"geo": data[82],"count":"1"},{"geo": data[83],"count":"1"},{"geo": data[84],"count":"1"},{"geo": data[85],"count":"1"},{"geo": data[86],"count":"1"},{"geo": data[87],"count":"1"},{"geo": data[88],"count":"1"},{"geo": data[89],"count":"1"},{"geo": data[90],"count":"1"},{"geo": data[91],"count":"1"},{"geo": data[92],"count":"1"},{"geo": data[93],"count":"2"},{"geo": data[94],"count":"1"},{"geo": data[95],"count":"1"},{"geo": data[96],"count":"1"},{"geo": data[97],"count":"1"},{"geo": data[98],"count":"1"},{"geo": data[99],"count":"4"}
+                                    ],
+                                    drawType: 'simple',
+                                    drawOptions: {
+                                        lineWidth: 5,
+                                        shadowBlur: 20,
+                                        shadowColor: "rgba(250, 255, 0, 1)",
+                                        strokeStyle: "rgba(250, 250, 0, 0.2)"
+                                    },
+                                    animation: true,
+                                    animationOptions: {
+                                        size: 5
+                                    }
+                                });
+                            }
+
+
+
+                        }
+                    }
+                });
+            if(checkbuttons[0].checked == true)
+            {
+            drv.search(new BMap.Point(123.24627569115,42.422734336027), new BMap.Point(123.29303681442,42.452958382531));
+            drv.search(new BMap.Point(123.06067028493,41.941817719338), new BMap.Point(123.14338764103,41.947024524045));
+            drv.search(new BMap.Point(122.95698537102,41.840004559464), new BMap.Point(123.00912330277,41.835355577988));
+            drv.search(new BMap.Point(123.11606548455,41.920173955073), new BMap.Point(123.14112132826,41.893752218464));
+            drv.search(new BMap.Point(122.96388300724,41.869474978723), new BMap.Point(123.00912330277,41.835355577988));
+            drv.search(new BMap.Point(123.19371879495,41.920748044063), new BMap.Point(123.14338764103,41.947024524045));
+            drv.search(new BMap.Point(123.12343664397,41.852478528193), new BMap.Point(123.11083726238,41.810799430002));
+            drv.search(new BMap.Point(122.9422839545,41.892253126877), new BMap.Point(122.91364005194,41.90836180946));
+            drv.search(new BMap.Point(122.84279173447,41.740251310747), new BMap.Point(122.90494753874,41.767926808404));
+            drv.search(new BMap.Point(122.91364005194,41.90836180946), new BMap.Point(122.97153659913,41.929571040628));
+            drv.search(new BMap.Point(122.8092714014,41.907293890135), new BMap.Point(123.47844738438,41.769735982456));
+            drv.search(new BMap.Point(123.35392646682,41.674752996479), new BMap.Point(123.37737333191,41.68223922581));
+            drv.search(new BMap.Point(123.33039741752,41.663413904476), new BMap.Point(123.32510985423,41.660251105854));
+            drv.search(new BMap.Point(123.37737333191,41.68223922581), new BMap.Point(123.35847638093,41.660191661411));
+            drv.search(new BMap.Point(123.33617175624,41.670107961881), new BMap.Point(123.3289967416,41.67302875067));
+            drv.search(new BMap.Point(123.34000899944,41.648591346035), new BMap.Point(123.35847638093,41.660191661411));
+            drv.search(new BMap.Point(123.37267794838,41.687812798534), new BMap.Point(123.40236921495,41.655604996701));
+            drv.search(new BMap.Point(123.35847638093,41.660191661411), new BMap.Point(123.39542340143,41.791112453703));
+            drv.search(new BMap.Point(123.38212403853,41.686328930104), new BMap.Point(123.37737333191,41.68223922581));
+            drv.search(new BMap.Point(123.38212403853,41.686328930104), new BMap.Point(123.35681745409,41.709407568754));
+            drv.search(new BMap.Point(123.33039741752,41.663413904476), new BMap.Point(123.35542311265,41.656245905686));
+            drv.search(new BMap.Point(123.33617175624,41.670107961881), new BMap.Point(123.33826547379,41.684145074893));
+            drv.search(new BMap.Point(123.33039741752,41.663413904476), new BMap.Point(123.38904898417,41.678736389732));
+            drv.search(new BMap.Point(123.33588424348,41.674602952159), new BMap.Point(123.3300939324,41.679502113306));
+            drv.search(new BMap.Point(123.3589242984,41.673120272789), new BMap.Point(123.37737333191,41.68223922581));
+            drv.search(new BMap.Point(123.35542311265,41.656245905686), new BMap.Point(123.32510985423,41.660251105854));
+            drv.search(new BMap.Point(123.3557207755,41.66547371187), new BMap.Point(123.35224703467,41.670238161576));
+            drv.search(new BMap.Point(123.3557207755,41.66547371187), new BMap.Point(123.40236921495,41.655604996701));
+            drv.search(new BMap.Point(123.34723387603,41.653787170343), new BMap.Point(123.34204628098,41.661439196525));
+            drv.search(new BMap.Point(123.38212403853,41.686328930104), new BMap.Point(123.38904898417,41.678736389732));
+            drv.search(new BMap.Point(123.37649131505,41.648412835528), new BMap.Point(123.3589242984,41.673120272789));
+            drv.search(new BMap.Point(123.37649131505,41.648412835528), new BMap.Point(123.37111731006,41.617357605664));
+            drv.search(new BMap.Point(123.39573079038,42.3893895848), new BMap.Point(123.32381961715,42.387548388129));
+            drv.search(new BMap.Point(123.39573079038,42.3893895848), new BMap.Point(123.52873766214,42.153142560156));
+            drv.search(new BMap.Point(123.40891182178,42.284970729894), new BMap.Point(123.40851343128,42.426119879816));
+            drv.search(new BMap.Point(123.34416838671,41.813727834715), new BMap.Point(123.35394460885,41.823737415082));
+            drv.search(new BMap.Point(123.34252915542,41.806932079905), new BMap.Point(123.26713161693,41.748980692488));
+            drv.search(new BMap.Point(123.34806875209,41.810801202222), new BMap.Point(123.35940027384,41.82125339968));
+            drv.search(new BMap.Point(123.34252915542,41.806932079905), new BMap.Point(123.34806875209,41.810801202222));
+            drv.search(new BMap.Point(123.34176535801,41.814578924628), new BMap.Point(123.38851690392,41.804002767302));
+            drv.search(new BMap.Point(123.33959352774,41.785081793025), new BMap.Point(123.33241033016,41.787801659815));
+            drv.search(new BMap.Point(123.34176535801,41.814578924628), new BMap.Point(123.34365711535,41.817626520229));
+            drv.search(new BMap.Point(123.34765886726,41.784444261185), new BMap.Point(123.35172039379,41.784122661909));
+            drv.search(new BMap.Point(123.34765886726,41.784444261185), new BMap.Point(123.38818629082,41.794245370502));
+            drv.search(new BMap.Point(123.35452138363,41.808726769355), new BMap.Point(123.34675289529,41.811038139838));
+            drv.search(new BMap.Point(123.35452138363,41.808726769355), new BMap.Point(123.33280916397,41.808879980261));
+            drv.search(new BMap.Point(123.34806875209,41.810801202222), new BMap.Point(123.34770354413,41.794623769164));
+            drv.search(new BMap.Point(123.34416838671,41.813727834715), new BMap.Point(123.36866477392,41.814283851645));
+            drv.search(new BMap.Point(123.35660058741,41.80022019657), new BMap.Point(123.35894050419,41.805983761615));
+            drv.search(new BMap.Point(123.34252915542,41.806932079905), new BMap.Point(123.32635129892,41.801371510515));
+            drv.search(new BMap.Point(123.34606598693,41.789706047533), new BMap.Point(123.34765886726,41.784444261185));
+            drv.search(new BMap.Point(123.34606598693,41.789706047533), new BMap.Point(123.3159365506,41.792054764519));
+            drv.search(new BMap.Point(123.34216908078,41.793328992273), new BMap.Point(123.33369861826,41.799619591724));
+            drv.search(new BMap.Point(123.34765886726,41.784444261185), new BMap.Point(123.32553336738,41.795256626841));
+            drv.search(new BMap.Point(123.35660058741,41.80022019657), new BMap.Point(123.38818629082,41.794245370502));
+            drv.search(new BMap.Point(123.35294409869,41.802342708448), new BMap.Point(123.34675289529,41.811038139838));
+            drv.search(new BMap.Point(123.35894050419,41.805983761615), new BMap.Point(123.36270338251,41.80820109501));
+            drv.search(new BMap.Point(123.1738912078,41.77002910931), new BMap.Point(123.02966568415,41.699242031595));
+            drv.search(new BMap.Point(123.16303727468,41.799944513234), new BMap.Point(123.26294186318,41.791103033207));
+            drv.search(new BMap.Point(123.22487985444,41.882716672755), new BMap.Point(123.11606548455,41.920173955073));
+            drv.search(new BMap.Point(123.22487985444,41.882716672755), new BMap.Point(123.24961796586,41.902756593981));
+            drv.search(new BMap.Point(123.23626230975,41.918409808627), new BMap.Point(123.31942164469,41.868857973147));
+            drv.search(new BMap.Point(123.30935801281,41.926982210829), new BMap.Point(123.19687299932,41.831298947544));
+            drv.search(new BMap.Point(123.30935801281,41.926982210829), new BMap.Point(123.33878796992,41.887429768718));
+            drv.search(new BMap.Point(123.25188582476,41.840537883471), new BMap.Point(123.15272988167,41.790950765636));
+            drv.search(new BMap.Point(123.28761011681,41.862940063967), new BMap.Point(123.31942164469,41.868857973147));
+            drv.search(new BMap.Point(123.23423559054,41.79702226601), new BMap.Point(123.24320671004,41.808362781556));
+            drv.search(new BMap.Point(123.20490143137,41.770470965996), new BMap.Point(123.29055791359,41.794439853395));
+            drv.search(new BMap.Point(123.22082483112,41.776181525599), new BMap.Point(123.24516877546,41.796909772877));
+            drv.search(new BMap.Point(123.22082483112,41.776181525599), new BMap.Point(123.21309814496,41.760152386498));
+            drv.search(new BMap.Point(123.2362314898,41.7641729857), new BMap.Point(123.25688285253,41.768593173205));
+            drv.search(new BMap.Point(123.25688285253,41.768593173205), new BMap.Point(123.2820598897,41.764034862418));
+            drv.search(new BMap.Point(123.2362314898,41.7641729857), new BMap.Point(123.22082483112,41.776181525599));
+            drv.search(new BMap.Point(123.2197800733,41.762535995154), new BMap.Point(123.21309814496,41.760152386498));
+            drv.search(new BMap.Point(123.24320671004,41.808362781556), new BMap.Point(123.21476752639,41.796346158179));
+            drv.search(new BMap.Point(123.18066710908,41.755326721622), new BMap.Point(123.30400996466,41.779053816102));
+            drv.search(new BMap.Point(123.17293021599,41.795536257343), new BMap.Point(123.47702390984,41.747969600583));
+            drv.search(new BMap.Point(123.23423559054,41.79702226601), new BMap.Point(123.2110440255,41.743473412148));
+            drv.search(new BMap.Point(123.27742974427,41.859806030313), new BMap.Point(123.29465539776,41.849639708482));
+            drv.search(new BMap.Point(123.2362314898,41.7641729857), new BMap.Point(123.25097541033,41.755200160271));
+            drv.search(new BMap.Point(123.23423559054,41.79702226601), new BMap.Point(123.26466260785,41.810564536799));
+            drv.search(new BMap.Point(122.87553145794,41.582201922327), new BMap.Point(123.02966568415,41.699242031595));
+            drv.search(new BMap.Point(123.25565714945,41.765619893484), new BMap.Point(123.25097541033,41.755200160271));
+            drv.search(new BMap.Point(122.79126288697,41.5639799392), new BMap.Point(122.7714994307,41.57179203986));
+            drv.search(new BMap.Point(122.99684402126,41.678295100511), new BMap.Point(122.80235285337,41.551074859397));
+            drv.search(new BMap.Point(122.83239509728,41.669065103781), new BMap.Point(122.75939607195,41.593738158906));
+            drv.search(new BMap.Point(122.90250382982,41.524650658831), new BMap.Point(123.0458381629,41.686977996513));
+            drv.search(new BMap.Point(123.02046954165,41.646972475547), new BMap.Point(123.06746298605,41.635920216387));
+            drv.search(new BMap.Point(122.89186149001,41.539808041587), new BMap.Point(123.07955110168,41.714943835342));
+            drv.search(new BMap.Point(122.90599796452,41.530903265287), new BMap.Point(122.90250382982,41.524650658831));
+            drv.search(new BMap.Point(122.75939607195,41.593738158906), new BMap.Point(122.77448535091,41.55888314691));
+            drv.search(new BMap.Point(122.81507984317,41.584297908501), new BMap.Point(122.98399884641,41.655501977125));
+            drv.search(new BMap.Point(122.86753078918,41.5458256226), new BMap.Point(122.86759385282,41.507937756222));
+            drv.search(new BMap.Point(122.83126977999,41.586455106602), new BMap.Point(122.86753078918,41.5458256226));
+            drv.search(new BMap.Point(122.7714994307,41.57179203986), new BMap.Point(122.6546237307,41.522021259288));
+            drv.search(new BMap.Point(123.48085235724,41.955073746152), new BMap.Point(123.48255806696,41.958272310832));
+            drv.search(new BMap.Point(123.48085235724,41.955073746152), new BMap.Point(123.49676371304,41.970635112813));
+            drv.search(new BMap.Point(123.52456860833,41.948869556507), new BMap.Point(123.52619533483,41.932073717186));
+            drv.search(new BMap.Point(123.53705149126,41.937114088346), new BMap.Point(123.58499578462,41.9387425462));
+            drv.search(new BMap.Point(123.48274322427,41.962939835057), new BMap.Point(123.46705554666,41.938719844085));
+           drv.search(new BMap.Point(123.53705149126,41.937114088346), new BMap.Point(123.58499578462,41.9387425462));
+            drv.search(new BMap.Point(123.48274322427,41.962939835057), new BMap.Point(123.46705554666,41.938719844085));
+            searchlength += 100;
+            console.log('start search!'+searchlength)
+            
+        }
+        if(checkbuttons[1].checked == true)
+        {
+            drv.search(new BMap.Point(123.45558941232,41.733998962322), new BMap.Point(123.45656569184,41.747353703962));
+            drv.search(new BMap.Point(123.4953800316,41.746351603222), new BMap.Point(123.4869307554,41.752048149974));
+            drv.search(new BMap.Point(123.46010357422,41.810766105539), new BMap.Point(123.46159232458,41.807109960081));
+            drv.search(new BMap.Point(123.46010357422,41.810766105539), new BMap.Point(123.46023119508,41.814175395163));
+            drv.search(new BMap.Point(123.4700454621,41.808793940855), new BMap.Point(123.43413781994,41.828963462994));
+            drv.search(new BMap.Point(123.4700454621,41.808793940855), new BMap.Point(123.46010357422,41.810766105539));
+            drv.search(new BMap.Point(123.44812487057,41.801219568789), new BMap.Point(123.42183510141,41.799140556608));
+            drv.search(new BMap.Point(123.44872086706,41.806936862335), new BMap.Point(123.44621770517,41.810701078247));
+            drv.search(new BMap.Point(123.45484673606,41.807354067727), new BMap.Point(123.45449524199,41.802746396078));
+            drv.search(new BMap.Point(123.45484673606,41.807354067727), new BMap.Point(123.45693414972,41.7943296515));
+            drv.search(new BMap.Point(123.47119923924,41.804672193418), new BMap.Point(123.4700454621,41.808793940855));
+            drv.search(new BMap.Point(123.45384005288,41.804864514091), new BMap.Point(123.43989778032,41.806650765816));
+            drv.search(new BMap.Point(123.46605598343,41.799483592187), new BMap.Point(123.45971055058,41.799420376248));
+            drv.search(new BMap.Point(123.47210591397,41.808948954418), new BMap.Point(123.47474682896,41.809916690887));
+            drv.search(new BMap.Point(123.46545869448,41.808301952728), new BMap.Point(123.45384005288,41.804864514091));
+            drv.search(new BMap.Point(123.44872086706,41.806936862335), new BMap.Point(123.44621770517,41.810701078247));
+            drv.search(new BMap.Point(123.46159232458,41.807109960081), new BMap.Point(123.46545869448,41.808301952728));
+            drv.search(new BMap.Point(123.46545869448,41.808301952728), new BMap.Point(123.47469692602,41.808464332588));
+            drv.search(new BMap.Point(123.47210591397,41.808948954418), new BMap.Point(123.4700454621,41.808793940855));
+            drv.search(new BMap.Point(123.47210591397,41.808948954418), new BMap.Point(123.46605405225,41.80759104937));
+            drv.search(new BMap.Point(123.42415520026,41.8982184536), new BMap.Point(123.43557292039,41.893596785093));
+            drv.search(new BMap.Point(123.46159232458,41.807109960081), new BMap.Point(123.47559097827,41.808511985625));
+            drv.search(new BMap.Point(123.42229031747,41.8878665566), new BMap.Point(123.40894249031,41.890101112292));
+            drv.search(new BMap.Point(123.42229031747,41.8878665566), new BMap.Point(123.38503207702,41.885913032659));
+            drv.search(new BMap.Point(123.41202744007,41.888056517757), new BMap.Point(123.40894249031,41.890101112292));
+            drv.search(new BMap.Point(123.40894249031,41.890101112292), new BMap.Point(123.39260337636,41.884066971701));
+            drv.search(new BMap.Point(123.42415520026,41.8982184536), new BMap.Point(123.43206798439,41.87937067179));
+            drv.search(new BMap.Point(123.43557292039,41.893596785093), new BMap.Point(123.46705554666,41.938719844085));
+            drv.search(new BMap.Point(123.44552909986,41.894463271905), new BMap.Point(123.42394201652,41.865230584321));
+            drv.search(new BMap.Point(123.40894249031,41.890101112292), new BMap.Point(123.47803961564,41.918430324617));
+            drv.search(new BMap.Point(123.40036655316,41.828894828308), new BMap.Point(123.41606084146,41.825319524211));
+            drv.search(new BMap.Point(123.40036655316,41.828894828308), new BMap.Point(123.41020323672,41.829352453266));
+            drv.search(new BMap.Point(123.39190466163,41.829891645212), new BMap.Point(123.3936364665,41.827566985713));
+            drv.search(new BMap.Point(123.36142143898,41.83497605603), new BMap.Point(123.35623161514,41.832628733801));
+            drv.search(new BMap.Point(123.38775032288,41.837028248558), new BMap.Point(123.38745434782,41.843221237811));
+            drv.search(new BMap.Point(123.38775032288,41.837028248558), new BMap.Point(123.37791458475,41.799827504863));
+            drv.search(new BMap.Point(123.37929067816,41.835494889684), new BMap.Point(123.38242365778,41.834056850142));
+            drv.search(new BMap.Point(123.37929067816,41.835494889684), new BMap.Point(123.33857642562,41.82629857577));
+            drv.search(new BMap.Point(123.37929067816,41.835494889684), new BMap.Point(123.40626713571,41.838416636586));
+            drv.search(new BMap.Point(123.35623161514,41.832628733801), new BMap.Point(123.39134972589,41.822090885834));
+            drv.search(new BMap.Point(123.40793710986,41.831532915442), new BMap.Point(123.40842115919,41.831286620218));
+            drv.search(new BMap.Point(123.4134508388,41.820020499038), new BMap.Point(123.41020323672,41.829352453266));
+            drv.search(new BMap.Point(123.36142143898,41.83497605603), new BMap.Point(123.36506609962,41.837480057167));
+            drv.search(new BMap.Point(123.40036655316,41.828894828308), new BMap.Point(123.3194151765,41.854405814977));
+            drv.search(new BMap.Point(123.40036077129,41.836322488787), new BMap.Point(123.40793710986,41.831532915442));
+            drv.search(new BMap.Point(123.40569755991,41.826681816618), new BMap.Point(123.39190466163,41.829891645212));
+            drv.search(new BMap.Point(123.39682668262,41.851644648738), new BMap.Point(123.40472589456,41.85093124131));
+            drv.search(new BMap.Point(123.39682668262,41.851644648738), new BMap.Point(123.39190466163,41.829891645212));
+            drv.search(new BMap.Point(123.36506609962,41.837480057167), new BMap.Point(123.41324944145,41.829019993877));
+            drv.search(new BMap.Point(123.36506609962,41.837480057167), new BMap.Point(123.36486287261,41.828295084286));
+            drv.search(new BMap.Point(123.52698054444,41.851361401829), new BMap.Point(123.54338106704,41.866912702518));
+            drv.search(new BMap.Point(123.62693831521,41.851466683234), new BMap.Point(123.63745208826,41.88092506901));
+            drv.search(new BMap.Point(123.5971042887,41.86717541658), new BMap.Point(123.54338106704,41.866912702518));
+            drv.search(new BMap.Point(123.52698054444,41.851361401829), new BMap.Point(123.55215308742,41.879747163506));
+            drv.search(new BMap.Point(123.539052917,41.848527137736), new BMap.Point(123.52749860987,41.840101369555));
+            drv.search(new BMap.Point(123.55380058864,41.840238872603), new BMap.Point(123.55809099069,41.832470398348));
+            drv.search(new BMap.Point(123.58377818415,41.847097953979), new BMap.Point(123.66221545333,41.876116715331));
+            drv.search(new BMap.Point(123.65003611428,41.859374887296), new BMap.Point(123.68017811296,41.884118199657));
+            drv.search(new BMap.Point(123.54338106704,41.866912702518), new BMap.Point(123.55849394806,41.867283979283));
+            drv.search(new BMap.Point(123.57892340422,41.871163413291), new BMap.Point(123.58716681983,41.827657874051));
+            drv.search(new BMap.Point(123.57892340422,41.871163413291), new BMap.Point(123.50127360744,41.832456108761));
+            drv.search(new BMap.Point(123.70533433257,41.865326767681), new BMap.Point(123.65003611428,41.859374887296));
+            drv.search(new BMap.Point(123.62109480092,41.869702727168), new BMap.Point(123.73105834984,41.908903804736));
+            drv.search(new BMap.Point(123.65003611428,41.859374887296), new BMap.Point(123.66221545333,41.876116715331));
+            drv.search(new BMap.Point(123.6094464515,41.843476588158), new BMap.Point(123.68017811296,41.884118199657));
+            drv.search(new BMap.Point(123.55470831413,41.823868570112), new BMap.Point(123.54794444769,41.8179046382));
+            drv.search(new BMap.Point(123.62829567106,41.807295779369), new BMap.Point(123.65003611428,41.859374887296));
+            drv.search(new BMap.Point(123.56852675846,41.782169019124), new BMap.Point(123.55274103764,41.805303541962));
+            drv.search(new BMap.Point(123.62829567106,41.807295779369), new BMap.Point(123.66031377761,41.820478832012));
+            drv.search(new BMap.Point(123.59451024362,41.818264209399), new BMap.Point(123.5428651339,41.776123862751));
+            drv.search(new BMap.Point(123.61160126774,41.772506558653), new BMap.Point(123.67444001114,41.825703090871));
+            drv.search(new BMap.Point(123.56852675846,41.782169019124), new BMap.Point(123.56789032091,41.751448080076));
+            drv.search(new BMap.Point(123.66031377761,41.820478832012), new BMap.Point(123.65003611428,41.859374887296));
+            drv.search(new BMap.Point(123.6008172336,41.807761474616), new BMap.Point(123.61287571606,41.725925452504));
+            drv.search(new BMap.Point(123.57504607628,41.833544698013), new BMap.Point(123.68520921313,41.860860236954));
+            drv.search(new BMap.Point(123.55809099069,41.832470398348), new BMap.Point(123.57023215557,41.827182796135));
+            drv.search(new BMap.Point(123.55809099069,41.832470398348), new BMap.Point(123.55470831413,41.823868570112));
+            drv.search(new BMap.Point(123.64479298759,41.756746740983), new BMap.Point(123.61287571606,41.725925452504));
+            drv.search(new BMap.Point(123.56852675846,41.782169019124), new BMap.Point(123.55274103764,41.805303541962));
+            drv.search(new BMap.Point(123.55809099069,41.832470398348), new BMap.Point(123.58716681983,41.827657874051));
+            drv.search(new BMap.Point(123.45253191158,41.797372019371), new BMap.Point(123.44812487057,41.801219568789));
+            drv.search(new BMap.Point(123.59451024362,41.818264209399), new BMap.Point(123.58716681983,41.827657874051));
+            drv.search(new BMap.Point(123.44919864529,41.802717001394), new BMap.Point(123.44812487057,41.801219568789));
+            drv.search(new BMap.Point(123.43274209418,41.80590546736), new BMap.Point(123.42919351716,41.80951370459));
+            drv.search(new BMap.Point(123.43640549613,41.791017069377), new BMap.Point(123.43836597088,41.788781893408));
+            drv.search(new BMap.Point(123.44840465682,41.794606090686), new BMap.Point(123.45693414972,41.7943296515));
+            drv.search(new BMap.Point(123.42183510141,41.799140556608), new BMap.Point(123.44812487057,41.801219568789));
+            drv.search(new BMap.Point(123.42183510141,41.799140556608), new BMap.Point(123.42059232982,41.801396735247));
+            drv.search(new BMap.Point(123.4451036592,41.798718905446), new BMap.Point(123.41769473786,41.796379636999));
+            drv.search(new BMap.Point(123.43806975469,41.798432808394), new BMap.Point(123.43232016405,41.803149750383));
+            drv.search(new BMap.Point(123.42639826134,41.79542812303), new BMap.Point(123.42955776675,41.791770418592));
+            drv.search(new BMap.Point(123.44840465682,41.794606090686), new BMap.Point(123.43527581681,41.793984205016));
+            drv.search(new BMap.Point(123.42183510141,41.799140556608), new BMap.Point(123.41769473786,41.796379636999));
+            drv.search(new BMap.Point(123.44152070468,41.792901509158), new BMap.Point(123.43627637223,41.80587898931));
+            drv.search(new BMap.Point(123.44840465682,41.794606090686), new BMap.Point(123.45534768136,41.794359465342));
+            drv.search(new BMap.Point(123.42689833641,41.798042005774), new BMap.Point(123.42183510141,41.799140556608));
+            drv.search(new BMap.Point(123.42689833641,41.798042005774), new BMap.Point(123.39902618621,41.815552718199));
+            drv.search(new BMap.Point(123.43627637223,41.80587898931), new BMap.Point(123.43328786568,41.799626867807));
+            drv.search(new BMap.Point(123.43232016405,41.803149750383), new BMap.Point(123.43415851263,41.815487796924));
+            drv.search(new BMap.Point(122.51026925525,42.115591366401), new BMap.Point(122.5043228988,42.152848204792));
+             drv.search(new BMap.Point(123.43232016405,41.803149750383), new BMap.Point(123.43415851263,41.815487796924));
+            drv.search(new BMap.Point(122.51026925525,42.115591366401), new BMap.Point(122.5043228988,42.152848204792));
+            searchlength +=100;
+            console.log('start search!'+searchlength)
+        }
+        if(checkbuttons[2].checked == true)
+        {
+            drv.search(new BMap.Point(123.27592180102,41.764747652222), new BMap.Point(123.2644317845,41.757387230741));
+            drv.search(new BMap.Point(123.32319278981,41.764246418844), new BMap.Point(123.36293533208,41.772373257484));
+            drv.search(new BMap.Point(123.32319278981,41.764246418844), new BMap.Point(123.31241624446,41.7691854782));
+            drv.search(new BMap.Point(123.31362183212,41.739016285221), new BMap.Point(123.31841967278,41.726516727346));
+            drv.search(new BMap.Point(123.27311373734,41.777415442006), new BMap.Point(123.27568098649,41.781181720213));
+            drv.search(new BMap.Point(123.37087326327,41.765452463248), new BMap.Point(123.35274600981,41.780336785185));
+            drv.search(new BMap.Point(123.37087326327,41.765452463248), new BMap.Point(123.38533523528,41.760234287665));
+            drv.search(new BMap.Point(123.37666893662,41.76168840793), new BMap.Point(123.3744673348,41.771028726509));
+            drv.search(new BMap.Point(123.26713161693,41.748980692488), new BMap.Point(123.2644317845,41.757387230741));
+            drv.search(new BMap.Point(123.2966516237,41.778523547673), new BMap.Point(123.3159365506,41.792054764519));
+            drv.search(new BMap.Point(123.31241624446,41.7691854782), new BMap.Point(123.32319278981,41.764246418844));
+            drv.search(new BMap.Point(123.32319278981,41.764246418844), new BMap.Point(123.35463497758,41.771490075159));
+            drv.search(new BMap.Point(123.23883560231,41.745546788376), new BMap.Point(123.24436684393,41.748800206941));
+            drv.search(new BMap.Point(123.24317106194,41.714536249684), new BMap.Point(123.18351357814,41.673087242721));
+            drv.search(new BMap.Point(123.2954120613,41.76312368666), new BMap.Point(123.28824198428,41.757781877872));
+            drv.search(new BMap.Point(123.25097541033,41.755200160271), new BMap.Point(123.25401222341,41.785011720572));
+            drv.search(new BMap.Point(123.2014155202,41.717845008622), new BMap.Point(123.18351357814,41.673087242721));
+            drv.search(new BMap.Point(123.25097541033,41.755200160271), new BMap.Point(123.2644317845,41.757387230741));
+            drv.search(new BMap.Point(123.34633800049,41.760551677567), new BMap.Point(123.31241624446,41.7691854782));
+            drv.search(new BMap.Point(123.37666893662,41.76168840793), new BMap.Point(123.39987057129,41.760269655721));
+            drv.search(new BMap.Point(123.37087326327,41.765452463248), new BMap.Point(123.3744673348,41.771028726509));
+            drv.search(new BMap.Point(123.25346422168,41.744186380427), new BMap.Point(123.23883560231,41.745546788376));
+            drv.search(new BMap.Point(123.2966516237,41.778523547673), new BMap.Point(123.30301344602,41.788797884089));
+            drv.search(new BMap.Point(123.31241624446,41.7691854782), new BMap.Point(123.32319278981,41.764246418844));
+            drv.search(new BMap.Point(123.34842403263,41.751486635669), new BMap.Point(123.34065423228,41.769490183085));
+            drv.search(new BMap.Point(123.27239631172,41.739826046854), new BMap.Point(123.2954120613,41.76312368666));
+            drv.search(new BMap.Point(123.35538706003,41.756442829942), new BMap.Point(123.35463497758,41.771490075159));
+            drv.search(new BMap.Point(123.35538706003,41.756442829942), new BMap.Point(123.34842403263,41.751486635669));
+            drv.search(new BMap.Point(123.57574992259,41.932863376614), new BMap.Point(123.53705149126,41.937114088346));
+            drv.search(new BMap.Point(123.54311569791,41.882547285892), new BMap.Point(123.55938945212,41.889143946294));
+            drv.search(new BMap.Point(123.61563573221,41.8812863397), new BMap.Point(123.52698054444,41.851361401829));
+            drv.search(new BMap.Point(123.73105834984,41.908903804736), new BMap.Point(123.73353365973,41.924543157245));
+            drv.search(new BMap.Point(123.58499578462,41.9387425462), new BMap.Point(123.43220571376,41.928545890351));
+            drv.search(new BMap.Point(123.58688972955,41.926626792542), new BMap.Point(123.59893996165,41.918779215344));
+            drv.search(new BMap.Point(123.56745901416,41.880296858465), new BMap.Point(123.53888062164,41.899478020638));
+            drv.search(new BMap.Point(123.66503626293,41.954798875255), new BMap.Point(123.66872532126,41.935450850478));
+            drv.search(new BMap.Point(123.68017811296,41.884118199657), new BMap.Point(123.66976763503,41.911983040614));
+            drv.search(new BMap.Point(123.55215308742,41.879747163506), new BMap.Point(123.54338106704,41.866912702518));
+            drv.search(new BMap.Point(123.59623497665,41.945289627988), new BMap.Point(123.61661807889,41.973026819165));
+            drv.search(new BMap.Point(123.66976763503,41.911983040614), new BMap.Point(123.5971042887,41.86717541658));
+            drv.search(new BMap.Point(123.56745901416,41.880296858465), new BMap.Point(123.55938945212,41.889143946294));
+            drv.search(new BMap.Point(123.66976763503,41.911983040614), new BMap.Point(123.53765921775,41.953131337414));
+            drv.search(new BMap.Point(123.6046078619,41.95343232692), new BMap.Point(123.66503626293,41.954798875255));
+            drv.search(new BMap.Point(123.54467247533,42.0252760839), new BMap.Point(123.51623232512,41.922245859332));
+            drv.search(new BMap.Point(123.54437752217,42.09205813402), new BMap.Point(123.43931474301,42.151956759342));
+            drv.search(new BMap.Point(123.53354441284,42.062989811422), new BMap.Point(123.53329765249,42.058374719998));
+            drv.search(new BMap.Point(123.64399572533,42.074895889998), new BMap.Point(123.56738884188,42.037543863818));
+            drv.search(new BMap.Point(123.47547186537,41.969675829084), new BMap.Point(123.48085235724,41.955073746152));
+            drv.search(new BMap.Point(123.57729656377,41.950982534023), new BMap.Point(123.59623497665,41.945289627988));
+            drv.search(new BMap.Point(123.54529342655,42.046750869493), new BMap.Point(123.52787221503,41.952603001875));
+            drv.search(new BMap.Point(123.61661807889,41.973026819165), new BMap.Point(123.59623497665,41.945289627988));
+            drv.search(new BMap.Point(123.63293838009,42.080987573872), new BMap.Point(123.63140579512,42.062625871206));
+            drv.search(new BMap.Point(123.29950919477,41.806642115792), new BMap.Point(123.30301344602,41.788797884089));
+            drv.search(new BMap.Point(123.29950919477,41.806642115792), new BMap.Point(123.30071623612,41.800536507409));
+            drv.search(new BMap.Point(123.26439746198,41.782518429073), new BMap.Point(123.25401222341,41.785011720572));
+            drv.search(new BMap.Point(123.26439746198,41.782518429073), new BMap.Point(123.26294186318,41.791103033207));
+            drv.search(new BMap.Point(123.31274514134,41.806295034384), new BMap.Point(123.12858294106,41.756389719004));
+            drv.search(new BMap.Point(123.33280916397,41.808879980261), new BMap.Point(123.37675631463,41.864877061985));
+            drv.search(new BMap.Point(123.279371901,41.807452010952), new BMap.Point(123.16819441314,41.756115912678));
+            drv.search(new BMap.Point(123.31863552086,41.802337526559), new BMap.Point(123.31674536718,41.807613380443));
+            drv.search(new BMap.Point(123.31534753103,41.800472875907), new BMap.Point(123.32553336738,41.795256626841));
+            drv.search(new BMap.Point(123.31534753103,41.800472875907), new BMap.Point(123.31863552086,41.802337526559));
+            drv.search(new BMap.Point(123.30301344602,41.788797884089), new BMap.Point(123.30377408352,41.799799341136));
+            drv.search(new BMap.Point(123.29950919477,41.806642115792), new BMap.Point(123.29770131233,41.80212471157));
+            drv.search(new BMap.Point(123.33280112774,41.803430400867), new BMap.Point(123.34806875209,41.810801202222));
+            drv.search(new BMap.Point(123.29055791359,41.794439853395), new BMap.Point(123.279371901,41.807452010952));
+            drv.search(new BMap.Point(123.26294186318,41.791103033207), new BMap.Point(123.25401222341,41.785011720572));
+            drv.search(new BMap.Point(123.26294186318,41.791103033207), new BMap.Point(123.26439746198,41.782518429073));
+            drv.search(new BMap.Point(123.33280916397,41.808879980261), new BMap.Point(123.34252915542,41.806932079905));
+            drv.search(new BMap.Point(123.29074739647,41.791145951475), new BMap.Point(123.29124916625,41.774125970154));
+            drv.search(new BMap.Point(123.33280112774,41.803430400867), new BMap.Point(123.3326122519,41.794876353079));
+            drv.search(new BMap.Point(123.31274514134,41.806295034384), new BMap.Point(123.33369861826,41.799619591724));
+            drv.search(new BMap.Point(123.40732558719,41.80497575903), new BMap.Point(123.48358280806,41.843305715978));
+            drv.search(new BMap.Point(123.40732558719,41.80497575903), new BMap.Point(123.39684465842,41.822321971552));
+            drv.search(new BMap.Point(123.40727775269,41.794550037424), new BMap.Point(123.41310811834,41.795750745291));
+            drv.search(new BMap.Point(123.41191336579,41.800333944383), new BMap.Point(123.41481905453,41.805096777251));
+            drv.search(new BMap.Point(123.41292453191,41.804340450007), new BMap.Point(123.45648641079,41.789761153436));
+            drv.search(new BMap.Point(123.40695408585,41.798537504033), new BMap.Point(123.42277931064,41.842675625087));
+            drv.search(new BMap.Point(123.40695408585,41.798537504033), new BMap.Point(123.43738141537,41.820591352029));
+            drv.search(new BMap.Point(123.40118612465,41.796309668434), new BMap.Point(123.40727775269,41.794550037424));
+            drv.search(new BMap.Point(123.40118612465,41.796309668434), new BMap.Point(123.39588704294,41.802733119514));
+            drv.search(new BMap.Point(123.40263036127,41.794000737281), new BMap.Point(123.38546592741,41.801243335958));
+            drv.search(new BMap.Point(123.41070954143,41.802250113825), new BMap.Point(123.41191336579,41.800333944383));
+            drv.search(new BMap.Point(123.41191336579,41.800333944383), new BMap.Point(123.41310811834,41.795750745291));
+            drv.search(new BMap.Point(123.42059232982,41.801396735247), new BMap.Point(123.41292453191,41.804340450007));
+            drv.search(new BMap.Point(123.40270120428,41.801357599085), new BMap.Point(123.39542340143,41.791112453703));
+            drv.search(new BMap.Point(123.40514873025,41.801277312127), new BMap.Point(123.40880346559,41.800503216453));
+            drv.search(new BMap.Point(123.40695408585,41.798537504033), new BMap.Point(123.39423233671,41.788384872028));
+            drv.search(new BMap.Point(123.49966830981,41.639683841327), new BMap.Point(123.42548076201,41.674425062886));
+            drv.search(new BMap.Point(123.34765886726,41.784444261185), new BMap.Point(123.38270589685,41.542221467096));
+            drv.search(new BMap.Point(123.45620686077,41.555193262429), new BMap.Point(123.42707470092,41.695084149662));
+            drv.search(new BMap.Point(123.43332145247,41.566520473456), new BMap.Point(123.4001463953,41.567344194489));
+            drv.search(new BMap.Point(123.53894501938,41.545721507186), new BMap.Point(123.60210532363,41.526142288291));
+            drv.search(new BMap.Point(123.69057452285,41.582594668341), new BMap.Point(123.78525535895,41.745518791688));
+            drv.search(new BMap.Point(123.58584668236,41.728195567489), new BMap.Point(123.49329349147,41.767572477114));
+            drv.search(new BMap.Point(123.49795175213,41.605041914129), new BMap.Point(123.48656837859,41.621100282576));
+            drv.search(new BMap.Point(123.72101303789,41.772364936758), new BMap.Point(123.5108321578,41.749605143418));
+            drv.search(new BMap.Point(123.48147887569,41.511202454668), new BMap.Point(123.44719279571,41.481768645193));
+            drv.search(new BMap.Point(123.55011654038,41.647598278385), new BMap.Point(123.51833317348,41.678213454452));
+            drv.search(new BMap.Point(123.68734733536,41.544638015901), new BMap.Point(123.69057452285,41.582594668341));
+            drv.search(new BMap.Point(123.55011654038,41.647598278385), new BMap.Point(123.51833317348,41.678213454452));
+            drv.search(new BMap.Point(123.68734733536,41.544638015901), new BMap.Point(123.69057452285,41.582594668341));
+            searchlength += 100;
+            console.log('start search!'+searchlength)
+        }
+        if(checkbuttons[3].checked == true)
+        {
+            drv.search(new BMap.Point(123.36165203226,41.807364804187), new BMap.Point(123.33280112774,41.803430400867));
+            drv.search(new BMap.Point(123.31274674055,41.799755596116), new BMap.Point(123.33739268476,41.810697316904));
+            drv.search(new BMap.Point(123.33739268476,41.810697316904), new BMap.Point(123.33857642562,41.82629857577));
+            drv.search(new BMap.Point(123.43876648299,41.797970030704), new BMap.Point(123.43148673663,41.81413077552));
+            drv.search(new BMap.Point(123.41336716312,41.794845279385), new BMap.Point(123.40310445586,41.799782464503));
+            drv.search(new BMap.Point(123.4279973444,41.795177279025), new BMap.Point(123.42639826134,41.79542812303));
+            drv.search(new BMap.Point(123.46605405225,41.80759104937), new BMap.Point(123.43896539732,41.797532094564));
+            drv.search(new BMap.Point(123.4279973444,41.795177279025), new BMap.Point(123.46605405225,41.80759104937));
+            drv.search(new BMap.Point(123.46868047421,41.743893482173), new BMap.Point(123.45550138436,41.728925192659));
+            drv.search(new BMap.Point(123.49398953609,41.755650611104), new BMap.Point(123.4869307554,41.752048149974));
+            drv.search(new BMap.Point(123.47702390984,41.747969600583), new BMap.Point(123.47613504037,41.739931403324));
+            drv.search(new BMap.Point(123.47702390984,41.747969600583), new BMap.Point(123.4869307554,41.752048149974));
+            drv.search(new BMap.Point(123.41988049005,41.793332119091), new BMap.Point(123.40727775269,41.794550037424));
+            drv.search(new BMap.Point(123.39423233671,41.788384872028), new BMap.Point(123.39091732478,41.795613086766));
+            drv.search(new BMap.Point(123.39937298483,41.787165959296), new BMap.Point(123.36566936936,41.786493119298));
+            drv.search(new BMap.Point(123.40420882077,41.786597123598), new BMap.Point(123.40005189664,41.778644232566));
+            drv.search(new BMap.Point(123.40773461812,41.790996425851), new BMap.Point(123.41266245514,41.790312892483));
+            drv.search(new BMap.Point(123.40773461812,41.790996425851), new BMap.Point(123.41567733388,41.802092017444));
+            drv.search(new BMap.Point(123.39423233671,41.788384872028), new BMap.Point(123.38546592741,41.801243335958));
+            drv.search(new BMap.Point(123.41310811834,41.795750745291), new BMap.Point(123.40695408585,41.798537504033));
+            drv.search(new BMap.Point(123.39549104746,41.785890174289), new BMap.Point(123.39423233671,41.788384872028));
+            drv.search(new BMap.Point(123.4065231219,41.784232547745), new BMap.Point(123.37810198653,41.774950947319));
+            drv.search(new BMap.Point(123.40420882077,41.786597123598), new BMap.Point(123.40773461812,41.790996425851));
+            drv.search(new BMap.Point(123.39766192974,41.792812125148), new BMap.Point(123.40263036127,41.794000737281));
+            drv.search(new BMap.Point(123.45156364154,41.827636502223), new BMap.Point(123.45177994157,41.82287565582));
+            drv.search(new BMap.Point(123.45960964936,41.820872978333), new BMap.Point(123.47210591397,41.808948954418));
+            drv.search(new BMap.Point(123.45960964936,41.820872978333), new BMap.Point(123.44114196497,41.822022870127));
+            drv.search(new BMap.Point(123.48134360867,41.828266987641), new BMap.Point(123.43883685863,41.830723771724));
+            drv.search(new BMap.Point(123.4859063129,41.813482076929), new BMap.Point(123.49429892812,41.812497434421));
+            drv.search(new BMap.Point(123.47272991349,41.811608970264), new BMap.Point(123.5139414667,41.845140144153));
+            drv.search(new BMap.Point(123.47875386221,41.812447844683), new BMap.Point(123.50002915953,41.824738529149));
+            drv.search(new BMap.Point(123.47875386221,41.812447844683), new BMap.Point(123.46971548943,41.831694509865));
+            drv.search(new BMap.Point(123.46335028561,41.81703692167), new BMap.Point(123.43850955007,41.817374629764));
+            drv.search(new BMap.Point(123.48523103227,41.823430214581), new BMap.Point(123.47490951244,41.830090530202));
+            drv.search(new BMap.Point(123.4702203115,41.81677417188), new BMap.Point(123.49309241976,41.836193506062));
+            drv.search(new BMap.Point(123.4859063129,41.813482076929), new BMap.Point(123.50724358441,41.831346142512));
+            drv.search(new BMap.Point(123.48413839148,41.819842523993), new BMap.Point(123.44621770517,41.810701078247));
+            drv.search(new BMap.Point(123.47272991349,41.811608970264), new BMap.Point(123.48358280806,41.843305715978));
+            drv.search(new BMap.Point(123.48134360867,41.828266987641), new BMap.Point(123.48392607617,41.829600366066));
+            drv.search(new BMap.Point(123.46335028561,41.81703692167), new BMap.Point(123.463661556,41.825378531953));
+            drv.search(new BMap.Point(123.47477652222,41.814721908894), new BMap.Point(123.47474682896,41.809916690887));
+            drv.search(new BMap.Point(123.45028340194,41.816130922411), new BMap.Point(123.4859063129,41.813482076929));
+            drv.search(new BMap.Point(123.44239087694,41.826517415094), new BMap.Point(123.44252569221,41.831683739056));
+            drv.search(new BMap.Point(123.47032143141,41.810726835916), new BMap.Point(123.46745829178,41.814954195844));
+            drv.search(new BMap.Point(123.4427308099,41.823992490989), new BMap.Point(123.44233233474,41.825386840387));
+            drv.search(new BMap.Point(123.45018137677,41.819548188564), new BMap.Point(123.49309241976,41.836193506062));
+            drv.search(new BMap.Point(123.43827028253,41.828677487009), new BMap.Point(123.30377408352,41.799799341136));
+            drv.search(new BMap.Point(123.44770368933,41.81538458222), new BMap.Point(123.4445255146,41.816276846974));
+            drv.search(new BMap.Point(123.46023119508,41.814175395163), new BMap.Point(123.45700803199,41.814719069304));
+            drv.search(new BMap.Point(123.45047819518,41.820680992209), new BMap.Point(123.4445255146,41.816276846974));
+            drv.search(new BMap.Point(123.44700178598,41.824498669374), new BMap.Point(123.4427308099,41.823992490989));
+            drv.search(new BMap.Point(123.45043471608,41.829825530486), new BMap.Point(123.43413781994,41.828963462994));
+            drv.search(new BMap.Point(123.45177506969,41.809973820161), new BMap.Point(123.45700803199,41.814719069304));
+            drv.search(new BMap.Point(123.44453827244,41.923799526972), new BMap.Point(123.4383700416,41.903643894859));
+            drv.search(new BMap.Point(123.42841467135,41.921375859003), new BMap.Point(123.42483470825,41.916968116107));
+            drv.search(new BMap.Point(123.40754105406,41.924835578533), new BMap.Point(123.41245089677,41.910909783518));
+            drv.search(new BMap.Point(123.40696758167,41.926681381275), new BMap.Point(123.40754105406,41.924835578533));
+            drv.search(new BMap.Point(123.42483470825,41.916968116107), new BMap.Point(123.49732175335,41.937437757339));
+            drv.search(new BMap.Point(123.42391497605,41.916060956074), new BMap.Point(123.42251454858,41.880819495762));
+            drv.search(new BMap.Point(123.42391497605,41.916060956074), new BMap.Point(123.42483470825,41.916968116107));
+            drv.search(new BMap.Point(123.40694816711,41.919165841239), new BMap.Point(123.38546592741,41.801243335958));
+            drv.search(new BMap.Point(123.40765119322,41.927123156344), new BMap.Point(123.41518131407,41.926531345262));
+            drv.search(new BMap.Point(123.43220571376,41.928545890351), new BMap.Point(123.39708249494,41.929268746532));
+            drv.search(new BMap.Point(123.42391497605,41.916060956074), new BMap.Point(123.41518131407,41.926531345262));
+            drv.search(new BMap.Point(123.36866477392,41.814283851645), new BMap.Point(123.43348624231,41.79174653129));
+            drv.search(new BMap.Point(123.36866477392,41.814283851645), new BMap.Point(123.37408539542,41.817496784183));
+            drv.search(new BMap.Point(123.4134508388,41.820020499038), new BMap.Point(123.42973628485,41.818076053232));
+            drv.search(new BMap.Point(123.4134508388,41.820020499038), new BMap.Point(123.36461886863,41.85523854111));
+            drv.search(new BMap.Point(123.38546592741,41.801243335958), new BMap.Point(123.40270120428,41.801357599085));
+            drv.search(new BMap.Point(123.38546592741,41.801243335958), new BMap.Point(123.36461886863,41.85523854111));
+            drv.search(new BMap.Point(123.35394460885,41.823737415082), new BMap.Point(123.35631172452,41.818932725144));
+            drv.search(new BMap.Point(123.35394460885,41.823737415082), new BMap.Point(123.36866477392,41.814283851645));
+            drv.search(new BMap.Point(123.38851690392,41.804002767302), new BMap.Point(123.39160008425,41.812060332588));
+            drv.search(new BMap.Point(123.39134972589,41.822090885834), new BMap.Point(123.39902618621,41.815552718199));
+            drv.search(new BMap.Point(123.35394460885,41.823737415082), new BMap.Point(123.34365711535,41.817626520229));
+            drv.search(new BMap.Point(123.35940027384,41.82125339968), new BMap.Point(123.40514873025,41.801277312127));
+            drv.search(new BMap.Point(123.35623161514,41.832628733801), new BMap.Point(123.36486287261,41.828295084286));
+            drv.search(new BMap.Point(123.35940027384,41.82125339968), new BMap.Point(123.35623161514,41.832628733801));
+            drv.search(new BMap.Point(123.39302244646,41.810085574155), new BMap.Point(123.37037528887,41.806002843258));
+            drv.search(new BMap.Point(123.39134972589,41.822090885834), new BMap.Point(123.36142143898,41.83497605603));
+            drv.search(new BMap.Point(123.39302244646,41.810085574155), new BMap.Point(123.38546592741,41.801243335958));
+            drv.search(new BMap.Point(123.39160008425,41.812060332588), new BMap.Point(123.35894050419,41.805983761615));
+            drv.search(new BMap.Point(123.3841455135,41.821308529128), new BMap.Point(123.39902618621,41.815552718199));
+            drv.search(new BMap.Point(123.3849681754,41.811951977816), new BMap.Point(123.38667162563,41.810853417759));
+            drv.search(new BMap.Point(123.35394460885,41.823737415082), new BMap.Point(123.36506609962,41.837480057167));
+            drv.search(new BMap.Point(123.39190466163,41.829891645212), new BMap.Point(123.38569122505,41.814446704723));
+            drv.search(new BMap.Point(123.29307148587,41.810417308217), new BMap.Point(123.32553336738,41.795256626841));
+            drv.search(new BMap.Point(123.37085266785,41.827306111204), new BMap.Point(123.50080611652,41.817998161155));
+            drv.search(new BMap.Point(123.26466260785,41.810564536799), new BMap.Point(123.25341053906,41.813496159045));
+            drv.search(new BMap.Point(123.29307148587,41.810417308217), new BMap.Point(123.279371901,41.807452010952));
+            drv.search(new BMap.Point(123.30028844489,41.840448459334), new BMap.Point(123.24961796586,41.902756593981));
+            drv.search(new BMap.Point(123.30406939099,41.873936437989), new BMap.Point(123.33878796992,41.887429768718));
+            drv.search(new BMap.Point(123.3194151765,41.854405814977), new BMap.Point(123.18995584987,41.884686850248));
+            drv.search(new BMap.Point(123.33857642562,41.82629857577), new BMap.Point(123.35755297665,41.861897267079));
+            drv.search(new BMap.Point(123.3194151765,41.854405814977), new BMap.Point(123.3020837309,41.845350085195));
+            drv.search(new BMap.Point(123.35781426262,41.842833081275), new BMap.Point(123.37808631673,41.857683303377));
+            drv.search(new BMap.Point(123.31474252372,41.812991156754), new BMap.Point(123.33126006488,41.839758484545));
+            drv.search(new BMap.Point(123.3194151765,41.854405814977), new BMap.Point(123.36461886863,41.85523854111));
+            drv.search(new BMap.Point(123.3194151765,41.854405814977), new BMap.Point(123.33318123685,41.847677885476));
+            drv.search(new BMap.Point(123.26466260785,41.810564536799), new BMap.Point(123.24320671004,41.808362781556));
+            drv.search(new BMap.Point(123.3194151765,41.854405814977), new BMap.Point(123.33318123685,41.847677885476));
+            drv.search(new BMap.Point(123.26466260785,41.810564536799), new BMap.Point(123.24320671004,41.808362781556));
+            searchlength +=100;
+            console.log('start search!'+searchlength);
+        }
+
+            });
+            var scale = 0.015;
+
+            radios.click(function(){
+
+                var i = 0;
+                for(var length = radios.find("input").length;i<length;i++)
+                    if(radios.find("input")[i].checked == true)
+                        break;
+                if(menu_drop_status[1] == 1)
+                    getBoundary('沈阳市和平区',scale*(i+1));
+                else if(menu_drop_status[1] == 2)
+                    getBoundary('沈阳市沈河区',scale*(i+1));
+                else if(menu_drop_status[1] == 3)
+                    getBoundary('沈阳市皇姑区',scale*(i+1));
+                else if(menu_drop_status[1] == 4)
+                    getBoundary('沈阳市铁西区',scale*(i+1));
+
+            });
+            var menu_drop_status = [0,0,0];
+            var menu_drop =  $('#menu_drop');
+            menu_drop.find('select').change(function(){
+
+
+
+                for(var i = 0,length = menu_drop.find("select").length;i<length;i++) {
+                    var Index = $('#menu_drop').find('select')[i].selectedIndex;
+                    if (menu_drop_status[i] != Index)
+                    {
+
+                        if(i == 0)
+                        {
+                            getBoundary('沈阳市',scale);
+                        }
+                        else if(i == 1)
+                        {
+
+                            if(Index == 1)
+                                getBoundary('沈阳市和平区',scale);
+                            else if(Index == 2)
+                                getBoundary('沈阳市沈河区',scale);
+                            else if(Index == 3)
+                                getBoundary('沈阳市皇姑区',scale);
+                            else if(Index == 4)
+                                getBoundary('沈阳市铁西区',scale);
+                        }
+                        else if(i == 2)
+                        {
+//                            if(menu_drop_status[i] == 1)
+//                                getBoundary('沈阳市和平区');
+//                            else if(menu_drop_status[i] == 2)
+//                                getBoundary('沈阳市浑南新区');
+//                            else if(menu_drop_status[i] == 3)
+//                                getBoundary('沈阳市浑南新区');
+
+                        }
+                        menu_drop_status[i]= Index;
+
+                    }
+
+                }
+
+
+
+
+
+
+            });
+
+
+            radios.radiosToSlider({
+
+                animation: true // false to disable the animation.
+            });
+
+
+
+
+
+
+        });
+
+
+
+    </script>
+<!--map customize div-->
+    <script type="text/javascript">
+
+
+   //      地图自定义样式
+   MapStyle = {
+       styleJson: [{
+           featureType: 'water',
+           elementType: 'all',
+           stylers: {
+               color: '#044161'
+           }
+       }, {
+           featureType: 'land',
+           elementType: 'all',
+           stylers: {
+               color: '#091934'
+           }
+       }, {
+           featureType: 'boundary',
+           elementType: 'geometry',
+           stylers: {
+               color: '#064f85'
+           }
+       }, {
+           featureType: 'railway',
+           elementType: 'all',
+           stylers: {
+               visibility: 'off'
+           }
+       }, {
+           featureType: 'highway',
+           elementType: 'geometry',
+           stylers: {
+               color: '#004981'
+           }
+       }, {
+           featureType: 'highway',
+           elementType: 'geometry.fill',
+           stylers: {
+               color: '#005b96',
+               lightness: 1
+           }
+       }, {
+           featureType: 'highway',
+           elementType: 'labels',
+           stylers: {
+               visibility: 'on'
+           }
+       }, {
+           featureType: 'arterial',
+           elementType: 'geometry',
+           stylers: {
+               color: '#004981',
+               lightness: -39
+           }
+       }, {
+           featureType: 'arterial',
+           elementType: 'geometry.fill',
+           stylers: {
+               color: '#00508b'
+           }
+       }, {
+           featureType: 'poi',
+           elementType: 'all',
+           stylers: {
+               visibility: 'off'
+           }
+       }, {
+           featureType: 'green',
+           elementType: 'all',
+           stylers: {
+               color: '#056197',
+               visibility: 'off'
+           }
+       }, {
+           featureType: 'subway',
+           elementType: 'all',
+           stylers: {
+               visibility: 'off'
+           }
+       }, {
+           featureType: 'manmade',
+           elementType: 'all',
+           stylers: {
+               visibility: 'off'
+           }
+       }, {
+           featureType: 'local',
+           elementType: 'all',
+           stylers: {
+               visibility: 'off'
+           }
+       }, {
+           featureType: 'arterial',
+           elementType: 'labels',
+           stylers: {
+               visibility: 'off'
+           }
+       }, {
+           featureType: 'boundary',
+           elementType: 'geometry.fill',
+           stylers: {
+               color: '#029fd4'
+           }
+       }, {
+           featureType: 'building',
+           elementType: 'all',
+           stylers: {
+               color: '#1a5787'
+           }
+       }, {
+           featureType: 'label',
+           elementType: 'all',
+           stylers: {
+               visibility: 'off'
+           }
+       }, {
+           featureType: 'poi',
+           elementType: 'labels.text.fill',
+           stylers: {
+               color: '#ffffff'
+           }
+       }, {
+           featureType: 'poi',
+           elementType: 'labels.text.stroke',
+           stylers: {
+               color: '#1e1c1c'
+           }
+       }]
+   };
+
+
+        // 定义一个控件类,即function
+        function ZoomControl(){
+            // 默认停靠位置和偏移量
+//            this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+//            this.defaultOffset = new BMap.Size(10, 10);
+        }
+
+        // 通过JavaScript的prototype属性继承于BMap.Control
+        ZoomControl.prototype = new BMap.Control();
+
+        // 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
+        // 在本方法中创建个div元素作为控件的容器,并将其添加到地图容器中
+        ZoomControl.prototype.initialize = function(map){
+            // 创建一个DOM元素
+            var div1 = document.createElement("div");
+            var div_1 = document.createElement("div");
+            // 添加文字说明
+            div_1.appendChild(document.createTextNode("切换背景"));
+            // 设置样式
+
+            div_1.style.backgroundColor= "#d64078";
+            div_1.style.color="white";
+            div_1.style.borderRadius=".3em";
+            div_1.style.padding=" 0.2em 6px";
+            div_1.style.float = "left";
+            div_1.style.position=" relative";
+            div_1.style.margin=" 0 0";
+            div_1.style.width=" 70px";
+            div_1.style.display=" inline_block";
+            div_1.style.textDecoration=" none";
+            div_1.style.border=" solid #b03060 1px";
+            div_1.style.borderBottom=" solid #b03060 4px";
+            div_1.style.textShadow=" 0px 2px 0 #b03060";
+            div_1.style.cursor =" pointer";
+            div_1.style.left = "auto";
+            div_1.style.bottom=" auto";
+            div_1.style.right=" auto";
+            div_1.style.top=" 10px";
+
+
+            // 绑定事件
+            div_1.onclick = function(e){
+
+                if(MapStyle_flag == false)
+                {
+                    map.setMapStyle(MapStyle);
+                    MapStyle_flag = true;
+
+                }
+                else
+                {
+                    map.setMapStyle({style:'normal'});
+                    MapStyle_flag = false;
+                }
+            }
+
+            var div_2 = document.createElement("div");
+            // 添加文字说明
+            div_2.appendChild(document.createTextNode("范围图层"));
+            // 设置样式
+
+            div_2.style.backgroundColor= "#d64078";
+            div_2.style.color="white";
+            div_2.style.borderRadius=".3em";
+            div_2.style.padding=" 0.2em 6px";
+            div_2.style.float = "left";
+            div_2.style.position=" relative";
+            div_2.style.margin=" 0 0";
+            div_2.style.marginLeft="10px";
+            div_2.style.width=" 70px";
+            div_2.style.display=" inline_block";
+            div_2.style.textDecoration=" none";
+            div_2.style.border=" solid #b03060 1px";
+            div_2.style.borderBottom=" solid #b03060 4px";
+            div_2.style.textShadow=" 0px 2px 0 #b03060";
+            div_2.style.cursor =" pointer";
+            div_2.style.left = "auto";
+            div_2.style.bottom=" auto";
+            div_2.style.right=" auto";
+            div_2.style.top=" 10px";
+
+
+            // 绑定事件
+            div_2.onclick = function(e){
+                oval.hide();
+                marker.hide();
+
+
+            };
+
+            var div_3 = document.createElement("div");
+            // 添加文字说明
+            div_3.appendChild(document.createTextNode("热力图"));
+            // 设置样式
+
+            div_3.style.backgroundColor= "#d64078";
+            div_3.style.color="white";
+            div_3.style.borderRadius=".2em";
+            div_3.style.padding=" 0.2em 6px";
+            div_3.style.float = "left";
+            div_3.style.position=" relative";
+            div_3.style.margin=" 0 0";
+            div_3.style.marginLeft="10px";
+            div_3.style.width=" 70px";
+            div_3.style.display=" inline_block";
+            div_3.style.textDecoration=" none";
+            div_3.style.border=" solid #b03060 1px";
+            div_3.style.borderBottom=" solid #b03060 4px";
+            div_3.style.textShadow=" 0px 3px 0 #b03060";
+            div_3.style.cursor =" pointer";
+            div_3.style.left = "auto";
+            div_3.style.bottom=" auto";
+            div_3.style.right=" auto";
+            div_3.style.top=" 10px";
+
+
+            // 绑定事件
+            div_3.onclick = function(e){
+
+                if(heatMap_flag == false)
+                {
+                    heatMap_flag = true;
+                    heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":40});
+                    map.addOverlay(heatmapOverlay);
+                    heatmapOverlay.setDataSet({data:heatMapPoints,max:100});
+                    heatmapOverlay.show();
+
+                }
+                else
+                {
+                    heatMap_flag = false;
+                    heatmapOverlay.hide();
+                }
+
+
+
+
+            };
+            div1.appendChild(div_1);
+            div1.appendChild(div_2);
+            div1.appendChild(div_3);
+            // 添加DOM元素到地图中
+            map.getContainer().appendChild(div1);
+            // 将DOM元素返回
+            return div1;
+        }
+        var MapStyle_flag = false;
+        var heatMap_flag = false;
+        // 创建控件
+        var myZoomCtrl = new ZoomControl();
+        // 添加到地图当中
+        map.addControl(myZoomCtrl);
+
+
+
+    </script>
+
+    <script type="text/javascript">
+
+        function lonlat2mercator(lonlat){
+
+
+            var projection =new BMap.MercatorProjection();
+            var mercator = projection.lngLatToPoint(lonlat);
+            return mercator
+
+        }
+    </script>
+
+
+</body>
+</html>
